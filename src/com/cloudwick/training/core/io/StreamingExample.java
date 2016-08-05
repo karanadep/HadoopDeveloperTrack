@@ -22,12 +22,15 @@ public class StreamingExample {
         }
         try {
             fos = new FileOutputStream(filename);
+
             fos.write(content.getBytes());
             fos.flush();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             //we add if statement for null pointer exceptions
+            // Block of code that is always executed when the try block is exited,
+            // no matter how the try block is exited.
             if (fos != null) {
                 try {
                     fos.close();
