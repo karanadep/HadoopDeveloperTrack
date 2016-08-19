@@ -1,0 +1,60 @@
+//NARROW TRANSFORMATIONS
+/////////////
+
+map() usage
+
+var x = sc.parallelize(Array("b", "a", "c"))
+var y = x.map(z => (z,1))
+println(x.collect().mkString(", "))
+println(y.collect().mkString(", "))
+
+/////////////
+filter() usage
+
+var x = sc.parallelize(Array("b", "a", "c"))
+var y = x.filter(n => n%2 == 1)
+println(x.collect().mkString(", "))
+println(y.collect().mkString(", "))
+
+/////////////
+flatMap() usage
+var x = sc.parallelize(Array("b", "a", "c"))
+var y = x.flatMap(n => Array(n, n*100, 42))
+println(x.collect().mkString(", "))
+println(y.collect().mkString(", "))
+
+/////////////
+
+//WIDE TRANSFORMATIONS
+
+/////////////
+//Groupby
+
+val x = sc.parallelize(Array("John", "Fred", "Anna", "James"))
+val y = x.groupBy(w => w.charAt(0))
+println(y.collect().mkString(", "))
+
+/////////////
+//DIFFERENCE BETWEEN GROUPBY AND GROUPBYKEY
+//For groupby key, input has to be pair RDD
+
+groupByKey
+val x = sc.parallelize(Array(('b',5),("B",4),("A",3),("A",2),("A",1)))
+val y = x.groupByKey()
+println(y.collect().mkString(", "))
+
+/////////////
+
+//Reduce_by_key
+//It is similar to combiner in Map Reduce
+
+val words = Array("one","two","three","three","three")
+val wordPairsRDD = sc.parallelize(words).map(word => (word,1))
+val wordCountsWithReduce = wordPairsRDD
+.reduceByKey(_+_)
+.collect()
+
+val wordCountsWithGroup = wordPairsRDD
+.groupByKey()
+.map(t => (t._1, t._2.sum))
+.collect()
