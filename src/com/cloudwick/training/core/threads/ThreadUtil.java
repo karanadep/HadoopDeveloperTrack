@@ -8,7 +8,7 @@ import java.util.ListResourceBundle;
  * Created by cloudwickguest on 8/4/16.
  */
 public class ThreadUtil {
-    public static void main(String[] args){
+/*    public static void main(String[] args){
         List<Thread> threadLA = new ArrayList<>();
         for(int i = 0; i < 1000; i++){
             FileProcessing fobj = new FileProcessing("Dir" + i);
@@ -28,5 +28,5 @@ public class ThreadUtil {
             }
         } while (running != 0);
         System.out.println("All threads terminated");
-    }
+    }*/
 }
