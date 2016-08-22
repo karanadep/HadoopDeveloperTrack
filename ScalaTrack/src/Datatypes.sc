@@ -1,5 +1,8 @@
-object Datatypes {
+package cloudwick.dev.scala
+
+object DataTypes {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+
   "101".toInt                                     //> res0: Int = 101
   
   //over riding default data type
@@ -68,4 +71,27 @@ object Datatypes {
                                                   //| 	line 3 
 	var age = 4                               //> age  : Int = 4
 	println(s"$s1 my age is ${age + 4}")      //> Hello my age is 8
+  
+  //regular expression
+  var reg = "[0-9]+".r                            //> reg  : scala.util.matching.Regex = [0-9]+
+  var address = "sundale apts, fremont"           //> address  : String = sundale apts, fremont
+  var match2 = reg.findFirstIn(address)           //> match2  : Option[String] = None
+  var match3 = reg.findAllIn(address)             //> match3  : scala.util.matching.Regex.MatchIterator = empty iterator
+  match3.foreach(println)
+  
+  //getOrElse is used to give custom message when expected expression not found
+  var match4 = reg.findFirstIn(address).getOrElse("No results found")
+                                                  //> match4  : String = No results found
+  
+  //replace patterns in a string
+  //used for masking data
+  var address3 = "123 fremont apts".replaceAll("[0-9]", "x")
+                                                  //> address3  : String = xxx fremont apts
+	
+	//creating implicit class
+	implicit class StingImp(s:String){
+		def increment = s.map(c => (c+1).toChar)
+	}
+	
+	var resultData = "Hello".increment        //> resultData  : String = Ifmmp
 }
